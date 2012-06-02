@@ -1,0 +1,12 @@
+These two scripts demonstrate a DOS attack against a server running SSL and
+eventlet.
+
+simple_eventlet_ssl.py starts a simple wsgi server. slow_conn.py is a client
+that reads one byte every two seconds.
+
+Start simple_eventlet_ssl.py and then run slow_conn.py. Note that if you start
+a second instance of slow_conn.py, the second (and all subsequent) instance
+will not read any data until the first connection is finished or terminated.
+
+The interesting thing is that it only happens (on my machine) with a response
+body that is 668706 bytes or larger.
